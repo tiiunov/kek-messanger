@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">messengerNew</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="settings_menu_change_name">изменить имя</string>
+    <string name="settings_menu_exite">выход</string>
+    <string name="register_text_enter_code">Введите код</string>
+    <string name="register_hint_default_code">------</string>
+    <string name="register_title_our_phone">Ваш телефон</string>
+    <string name="register_enter_phone_number">введите номер телефона</string>
+    <string name="register_toast_enter_phone">Введите номер телефона</string>
+    <string name="incorrect_code_toast">Неверно введен код</string>
 </resources>
