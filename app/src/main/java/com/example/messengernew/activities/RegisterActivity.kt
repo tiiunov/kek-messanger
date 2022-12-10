@@ -3,12 +3,14 @@ package com.example.messengernew.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
+import com.example.messengernew.MainActivity
 import com.example.messengernew.R
 import com.example.messengernew.databinding.ActivityRegisterBinding
 import com.example.messengernew.ui.fragments.EnterPhoneNumberFragment
 import com.example.messengernew.utils.changeFragment
+import com.example.messengernew.utils.initFirebase
 
-class RegisterActivity : AppCompatActivity() {
+open class RegisterActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivityRegisterBinding
     private lateinit var mToolBar: Toolbar
@@ -17,6 +19,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
+        initFirebase()
     }
 
     override fun onStart() {
