@@ -26,6 +26,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
                 AUTH.signOut()
                 changeFragment(EnterPhoneNumberFragment())
             }
+            R.id.settings_menu_change_name -> changeFragment(ChangeNameFragment())
         }
         return true
     }

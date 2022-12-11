@@ -10,8 +10,22 @@ fun Fragment.showToast(message: String) {
     Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
 }
 
+fun Fragment.changeFragment(newFragment: Fragment) {
+    parentFragmentManager.beginTransaction()
+        .addToBackStack(null)
+        .replace(R.id.dataContainer, newFragment)
+        .commit()
+}
+
 fun Fragment.changeFragment(newFragment: BaseFragment) {
     parentFragmentManager.beginTransaction()
+        .addToBackStack(null)
+        .replace(R.id.dataContainer, newFragment)
+        .commit()
+}
+
+fun AppCompatActivity.changeFragment(newFragment: Fragment) {
+    supportFragmentManager.beginTransaction()
         .addToBackStack(null)
         .replace(R.id.dataContainer, newFragment)
         .commit()

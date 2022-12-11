@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 open class MainActivity : RegisterActivity() {
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var mToolbar: Toolbar
-    private lateinit var mAppDriver: AppDriver
+    lateinit var mAppDriver: AppDriver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

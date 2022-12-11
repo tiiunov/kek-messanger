@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.messengernew.MainActivity
 import com.example.messengernew.R
 import com.example.messengernew.databinding.FragmentChatsBinding
 
@@ -12,5 +13,9 @@ open class BaseFragment(layout:Int) : Fragment(layout) {
 
     override fun onStart() {
         super.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
     }
 }

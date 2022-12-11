@@ -10,4 +10,9 @@
     <string name="register_enter_phone_number">введите номер телефона</string>
     <string name="register_toast_enter_phone">Введите номер телефона</string>
     <string name="incorrect_code_toast">Неверно введен код</string>
+    <string name="settings_hint_input_name">Имя</string>
+    <string name="settings_hint_input_surname">Фамилия</string>
+    <string name="confirm">confirm</string>
+    <string name="setting_toast_name_is_empty">Имя не должно быть пустым</string>
+    <string name="toast_data_update">Данные обновлены</string>
 </resources>
