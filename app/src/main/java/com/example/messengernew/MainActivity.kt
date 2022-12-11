@@ -1,11 +1,13 @@
 package com.example.messengernew
 
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import com.example.messengernew.activities.RegisterActivity
 import com.example.messengernew.databinding.ActivityMainBinding
 import com.example.messengernew.models.User
@@ -53,6 +55,13 @@ open class MainActivity : RegisterActivity() {
         mAppDriver = AppDriver(this, mToolbar)
         initFirebase()
         initUser()
+        initContacts()
+    }
+
+    private fun initContacts() {
+        if (checkPermission(READ_CONTACTS, this)) {
+            showToast("чтение контактов...")
+        }
     }
 
     private fun initUser() {
@@ -66,5 +75,20 @@ open class MainActivity : RegisterActivity() {
     override fun onStop() {
         super.onStop()
         AppState.updateState(AppState.OFFLINE, this.baseContext)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (ContextCompat.checkSelfPermission(
+                this,
+                READ_CONTACTS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            initContacts()
+        }
     }
 }

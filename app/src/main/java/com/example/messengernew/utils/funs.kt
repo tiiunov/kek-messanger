@@ -1,5 +1,6 @@
 package com.example.messengernew.utils
 
+import android.app.Activity
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -8,6 +9,10 @@ import com.example.messengernew.ui.fragments.BaseFragment
 
 fun Fragment.showToast(message: String) {
     Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
+}
+
+fun Activity.showToast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 
 fun Fragment.changeFragment(newFragment: Fragment) {
