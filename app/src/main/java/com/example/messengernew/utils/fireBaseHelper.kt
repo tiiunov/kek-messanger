@@ -15,10 +15,12 @@ const val CHILD_ID = "id"
 const val CHILD_USER_NAME = "userName"
 const val CONSTANT_CHILD_PHONE = "phone"
 const val CHILD_FULL_NAME= "fullName"
+const val NODE_USERNAMES = "usernames"
+const val CHILD_STATE = "state"
 
 fun initFirebase() {
     AUTH = FirebaseAuth.getInstance()
     REF_DATABASE_ROOT = FirebaseDatabase.getInstance().reference
-    USER = User()
     UID = AUTH.currentUser?.uid.toString()
+    USER = User()
 }

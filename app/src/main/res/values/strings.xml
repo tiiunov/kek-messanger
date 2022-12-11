@@ -2,6 +2,7 @@
     <string name="app_name">messengerNew</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="messenger_name">kek messenger</string>
     <string name="settings_menu_change_name">изменить имя</string>
     <string name="settings_menu_exite">выход</string>
     <string name="register_text_enter_code">Введите код</string>
@@ -15,4 +16,15 @@
     <string name="confirm">confirm</string>
     <string name="setting_toast_name_is_empty">Имя не должно быть пустым</string>
     <string name="toast_data_update">Данные обновлены</string>
+    <string name="settings_text_account">Аккаунт</string>
+    <string name="settings_label_phone_number">Нажмите, чтобы изменить номер телефона</string>
+    <string name="settings_default_username" />
+    <string name="settings_default_status" />
+    <string name="settings_default_number" />
+    <string name="settings_default_login" />
+    <string name="settings_label_login" />
+    <string name="settings_login">Имя пользователя</string>
+    <string name="settings_default_bio" />
+    <string name="settings_phone_number">Номер телефона</string>
+    <string name="settings_hint_input_username">username</string>
 </resources>

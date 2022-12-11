@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_UNLOCKED
 import com.example.messengernew.R
 import com.example.messengernew.ui.fragments.ChatsFragment
 import com.example.messengernew.ui.fragments.SettingsFragment
+import com.example.messengernew.utils.USER
 import com.example.messengernew.utils.changeFragment
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
@@ -23,6 +24,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 class AppDriver(val mainActivity: AppCompatActivity, val toolBar: Toolbar) {
     private lateinit var mDrawer: Drawer
     private lateinit var mHeader: AccountHeader
+    private lateinit var mCurrentProfile:ProfileDrawerItem
 
     fun create() {
         createHeader()
@@ -100,7 +102,7 @@ class AppDriver(val mainActivity: AppCompatActivity, val toolBar: Toolbar) {
                         1 -> mainActivity.changeFragment(ChatsFragment())
                     }
                     when (position) {
-                        8 -> mainActivity.changeFragment(SettingsFragment())
+                        8 -> mainActivity.changeFragment(SettingsFragment(mHeader))
                     }
                     return false
                 }
@@ -110,12 +112,25 @@ class AppDriver(val mainActivity: AppCompatActivity, val toolBar: Toolbar) {
     }
 
     private fun createHeader() {
+        /* Создание хедера*/
+        mCurrentProfile = ProfileDrawerItem()
+            .withName(USER.fullName)
+            .withEmail(USER.phone)
+            .withIdentifier(200)
         mHeader = AccountHeaderBuilder()
             .withActivity(mainActivity)
             .withHeaderBackground(R.drawable.header)
             .addProfiles(
-                ProfileDrawerItem().withName("Vova Tiunov")
-                    .withEmail("testesetstetstet")
+                mCurrentProfile
             ).build()
+    }
+
+    fun updateHeader() {
+        mCurrentProfile = ProfileDrawerItem()
+            .withName(USER.fullName)
+            .withEmail(USER.phone)
+            .withIdentifier(200)
+
+        mHeader.updateProfile(mCurrentProfile)
     }
 }
