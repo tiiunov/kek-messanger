@@ -1,5 +1,6 @@
 package com.example.messengernew.ui.fragments
 
+import com.example.messengernew.MainActivity
 import com.example.messengernew.R
 import com.example.messengernew.activities.RegisterActivity
 import com.example.messengernew.utils.*
@@ -30,16 +31,17 @@ class EnterCodeFragment(val mPhoneNumber: String, val id: String) : BaseFragment
                 dataMap[CONSTANT_CHILD_PHONE] = mPhoneNumber
                 dataMap[CHILD_USER_NAME] = uid
 
-                REF_DATABASE_ROOT.child(NODE_USERS).child(uid).updateChildren(dataMap)
-                    .addOnCompleteListener{ task ->
-                        if (task.isSuccessful){
-                            showToast("Добро пожаловать!")
-                            (activity as RegisterActivity).changeFragment(ChatsFragment())
-                        } else {
-                            showToast(task.exception?.message.toString())
-                        }
+                REF_DATABASE_ROOT.child(NODE_PHONES).child(mPhoneNumber).setValue(uid)
+                    .addOnFailureListener { showToast(it.message.toString()) }
+                    .addOnCompleteListener {
+                        REF_DATABASE_ROOT.child(NODE_USERS).child(uid).updateChildren(dataMap)
+                            .addOnSuccessListener {
+                                showToast("Добро пожаловать!")
+                                (activity as RegisterActivity).changeFragment(ChatsFragment())
+                            }
+                            .addOnFailureListener{showToast(it.message.toString())}
                     }
-            } else {
+                } else {
                 showToast(it.exception?.message.toString())
             }
         }

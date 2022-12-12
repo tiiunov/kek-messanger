@@ -1,11 +1,7 @@
 package com.example.messengernew
 
 import android.content.pm.PackageManager
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.example.messengernew.activities.RegisterActivity
@@ -15,11 +11,6 @@ import com.example.messengernew.ui.fragments.ChatsFragment
 import com.example.messengernew.ui.fragments.EnterPhoneNumberFragment
 import com.example.messengernew.ui.objects.AppDriver
 import com.example.messengernew.utils.*
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.fragment_settings.*
 
 open class MainActivity : RegisterActivity() {
     private lateinit var mBinding: ActivityMainBinding
@@ -34,6 +25,10 @@ open class MainActivity : RegisterActivity() {
 
     override fun onStart() {
         super.onStart()
+        init()
+    }
+
+    open fun init() {
         initFields()
         initFunc()
         AppState.updateState(AppState.ONLINE, this.baseContext)
@@ -55,13 +50,7 @@ open class MainActivity : RegisterActivity() {
         mAppDriver = AppDriver(this, mToolbar)
         initFirebase()
         initUser()
-        initContacts()
-    }
-
-    private fun initContacts() {
-        if (checkPermission(READ_CONTACTS, this)) {
-            showToast("чтение контактов...")
-        }
+        initContacts(this)
     }
 
     private fun initUser() {
@@ -88,7 +77,7 @@ open class MainActivity : RegisterActivity() {
                 READ_CONTACTS
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            initContacts()
+            initContacts(this)
         }
     }
 }

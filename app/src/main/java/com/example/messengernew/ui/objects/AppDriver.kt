@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED
 import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_UNLOCKED
 import com.example.messengernew.R
 import com.example.messengernew.ui.fragments.ChatsFragment
+import com.example.messengernew.ui.fragments.ContactsFragment
 import com.example.messengernew.ui.fragments.SettingsFragment
 import com.example.messengernew.utils.USER
 import com.example.messengernew.utils.changeFragment
@@ -103,6 +104,9 @@ class AppDriver(val mainActivity: AppCompatActivity, val toolBar: Toolbar) {
                     }
                     when (position) {
                         8 -> mainActivity.changeFragment(SettingsFragment(mHeader))
+                    }
+                    when (position) {
+                        5  -> mainActivity.changeFragment(ContactsFragment())
                     }
                     return false
                 }
