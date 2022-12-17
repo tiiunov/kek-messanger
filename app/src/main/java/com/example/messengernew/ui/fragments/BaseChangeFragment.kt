@@ -1,7 +1,8 @@
 package com.example.messengernew.ui.fragments
 
-import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.example.messengernew.MainActivity
 import com.example.messengernew.R
@@ -12,10 +13,6 @@ open class BaseChangeFragment(layout: Int) : Fragment(layout) {
     override fun onStart() {
         super.onStart()
         setHasOptionsMenu(true)
-    }
-
-    override fun onStop() {
-        super.onStop()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

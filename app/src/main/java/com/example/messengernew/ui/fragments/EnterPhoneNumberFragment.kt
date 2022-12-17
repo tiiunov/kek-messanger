@@ -1,30 +1,28 @@
 package com.example.messengernew.ui.fragments
 
-import android.app.Activity
-import kotlinx.android.synthetic.main.fragment_enter_phone_number.*
 import com.example.messengernew.R
 import com.example.messengernew.activities.RegisterActivity
 import com.example.messengernew.utils.AUTH
 import com.example.messengernew.utils.changeFragment
 import com.example.messengernew.utils.showToast
 import com.google.firebase.FirebaseException
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
+import kotlinx.android.synthetic.main.fragment_enter_phone_number.*
 import java.util.concurrent.TimeUnit
 
 
-class EnterPhoneNumberFragment() : BaseFragment(R.layout.fragment_enter_phone_number) {
+class EnterPhoneNumberFragment : BaseFragment(R.layout.fragment_enter_phone_number) {
 
     private lateinit var mPhoneNumber: String
     private lateinit var mCallback: PhoneAuthProvider.OnVerificationStateChangedCallbacks
 
     override fun onStart() {
         super.onStart()
-        mCallback = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
+        mCallback = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                AUTH.signInWithCredential(credential).addOnCompleteListener{
+                AUTH.signInWithCredential(credential).addOnCompleteListener {
                     if (it.isSuccessful) {
                         showToast("Добро пожаловать!")
                         changeFragment(ChatsFragment())

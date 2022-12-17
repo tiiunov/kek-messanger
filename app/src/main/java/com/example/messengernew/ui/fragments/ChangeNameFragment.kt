@@ -1,19 +1,13 @@
 package com.example.messengernew.ui.fragments
 
-import android.os.Bundle
-import android.view.*
-import androidx.fragment.app.Fragment
-import com.example.messengernew.MainActivity
 import com.example.messengernew.R
-import com.example.messengernew.ui.objects.AppDriver
 import com.example.messengernew.utils.*
 import com.mikepenz.materialdrawer.AccountHeader
-import com.mikepenz.materialdrawer.AccountHeaderBuilder
-import com.mikepenz.materialdrawer.Drawer
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import kotlinx.android.synthetic.main.fragment_change_name.*
 
-class ChangeNameFragment(val header: AccountHeader) : BaseChangeFragment(R.layout.fragment_change_name) {
+class ChangeNameFragment(val header: AccountHeader) :
+    BaseChangeFragment(R.layout.fragment_change_name) {
 
     override fun onResume() {
         super.onResume()
@@ -42,7 +36,7 @@ class ChangeNameFragment(val header: AccountHeader) : BaseChangeFragment(R.layou
                         updateHeader()
                         parentFragmentManager.popBackStack()
                     }
-            }
+                }
         }
     }
 

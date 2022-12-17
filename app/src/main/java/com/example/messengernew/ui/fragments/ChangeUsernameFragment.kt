@@ -1,12 +1,7 @@
 package com.example.messengernew.ui.fragments
 
-import android.os.Bundle
-import android.view.*
-import androidx.fragment.app.Fragment
-import com.example.messengernew.MainActivity
 import com.example.messengernew.R
 import com.example.messengernew.utils.*
-import kotlinx.android.synthetic.main.fragment_change_name.*
 import kotlinx.android.synthetic.main.fragment_change_username.*
 
 class ChangeUsernameFragment : BaseChangeFragment(R.layout.fragment_change_username) {
@@ -25,7 +20,7 @@ class ChangeUsernameFragment : BaseChangeFragment(R.layout.fragment_change_usern
             showToast("username не должен быть пустым")
         } else {
             REF_DATABASE_ROOT.child(NODE_USERNAMES)
-                .addListenerForSingleValueEvent(ValueEventListenerImpl{
+                .addListenerForSingleValueEvent(ValueEventListenerImpl {
                     if (it.hasChild(mNewUsername)) {
                         showToast("пользователь с таким username уже существует")
                     } else {
@@ -37,7 +32,7 @@ class ChangeUsernameFragment : BaseChangeFragment(R.layout.fragment_change_usern
 
     private fun changeUsername() {
         REF_DATABASE_ROOT.child(NODE_USERNAMES).child(mNewUsername).setValue(UID)
-            .addOnCompleteListener{
+            .addOnCompleteListener {
                 if (it.isSuccessful) {
                     updateCurrentUsername()
                 }
@@ -46,7 +41,7 @@ class ChangeUsernameFragment : BaseChangeFragment(R.layout.fragment_change_usern
 
     private fun updateCurrentUsername() {
         REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(CHILD_USER_NAME).setValue(mNewUsername)
-            .addOnCompleteListener{
+            .addOnCompleteListener {
                 if (it.isSuccessful) {
                     deleteOldUsername()
                 } else {
@@ -57,7 +52,7 @@ class ChangeUsernameFragment : BaseChangeFragment(R.layout.fragment_change_usern
 
     private fun deleteOldUsername() {
         REF_DATABASE_ROOT.child(NODE_USERNAMES).child(USER.userName).removeValue()
-            .addOnCompleteListener{
+            .addOnCompleteListener {
                 if (it.isSuccessful) {
                     showToast("username изменен")
                     parentFragmentManager.popBackStack()

@@ -6,7 +6,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.example.messengernew.activities.RegisterActivity
 import com.example.messengernew.databinding.ActivityMainBinding
-import com.example.messengernew.models.User
 import com.example.messengernew.ui.fragments.ChatsFragment
 import com.example.messengernew.ui.fragments.EnterPhoneNumberFragment
 import com.example.messengernew.ui.objects.AppDriver
@@ -15,7 +14,6 @@ import com.example.messengernew.utils.*
 open class MainActivity : RegisterActivity() {
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var mToolbar: Toolbar
-    lateinit var mAppDriver: AppDriver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +29,11 @@ open class MainActivity : RegisterActivity() {
     open fun init() {
         initFields()
         initFunc()
-        AppState.updateState(AppState.ONLINE, this.baseContext)
     }
 
     private fun initFunc() {
         setSupportActionBar(mToolbar)
-        mAppDriver.create()
+        APP_DRIVER.create()
         if (AUTH.currentUser != null) {
             changeFragment(ChatsFragment())
         } else {
@@ -47,18 +44,8 @@ open class MainActivity : RegisterActivity() {
 
     private fun initFields() {
         mToolbar = mBinding.mainToolBar
-        mAppDriver = AppDriver(this, mToolbar)
+        APP_DRIVER = AppDriver(this, mToolbar)
         initFirebase()
-        initUser()
-        initContacts(this)
-    }
-
-    private fun initUser() {
-        REF_DATABASE_ROOT.child(NODE_USERS).child(UID)
-            .addListenerForSingleValueEvent(ValueEventListenerImpl{
-                USER = it.getValue(User::class.java) ?: User()
-                mAppDriver.updateHeader()
-            })
     }
 
     override fun onStop() {

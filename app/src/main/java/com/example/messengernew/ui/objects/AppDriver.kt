@@ -1,13 +1,10 @@
 package com.example.messengernew.ui.objects
 
-import android.annotation.SuppressLint
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED
-import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_UNLOCKED
 import com.example.messengernew.R
+import com.example.messengernew.ui.fragments.BaseFragment
 import com.example.messengernew.ui.fragments.ChatsFragment
 import com.example.messengernew.ui.fragments.ContactsFragment
 import com.example.messengernew.ui.fragments.SettingsFragment
@@ -25,7 +22,8 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 class AppDriver(val mainActivity: AppCompatActivity, val toolBar: Toolbar) {
     private lateinit var mDrawer: Drawer
     private lateinit var mHeader: AccountHeader
-    private lateinit var mCurrentProfile:ProfileDrawerItem
+    private lateinit var mCurrentProfile: ProfileDrawerItem
+    private val mContactFragment: BaseFragment = ContactsFragment()
 
     fun create() {
         createHeader()
@@ -106,7 +104,7 @@ class AppDriver(val mainActivity: AppCompatActivity, val toolBar: Toolbar) {
                         8 -> mainActivity.changeFragment(SettingsFragment(mHeader))
                     }
                     when (position) {
-                        5  -> mainActivity.changeFragment(ContactsFragment())
+                        5 -> mainActivity.changeFragment(mContactFragment)
                     }
                     return false
                 }

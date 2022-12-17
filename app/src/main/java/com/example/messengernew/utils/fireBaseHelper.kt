@@ -10,7 +10,6 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.ArrayList
 
 lateinit var AUTH: FirebaseAuth
 lateinit var UID: String
@@ -21,7 +20,7 @@ const val NODE_USERS = "users"
 const val CHILD_ID = "id"
 const val CHILD_USER_NAME = "userName"
 const val CONSTANT_CHILD_PHONE = "phone"
-const val CHILD_FULL_NAME= "fullName"
+const val CHILD_FULL_NAME = "fullName"
 const val NODE_USERNAMES = "usernames"
 const val CHILD_STATE = "state"
 const val NODE_PHONES = "phones"
@@ -66,8 +65,8 @@ fun initContacts(activity: Activity) {
 }
 
 fun updatePhonesToDb(contacts: ArrayList<CommonModel>) {
-    REF_DATABASE_ROOT.child(NODE_PHONES).addListenerForSingleValueEvent(ValueEventListenerImpl{
-        it.children.forEach{ dbContact ->
+    REF_DATABASE_ROOT.child(NODE_PHONES).addListenerForSingleValueEvent(ValueEventListenerImpl {
+        it.children.forEach { dbContact ->
             contacts.forEach { contact ->
                 if (dbContact.key == contact.phone) {
                     REF_DATABASE_ROOT.child(NODE_PHONE_CONTACTS).child(USER.id)
