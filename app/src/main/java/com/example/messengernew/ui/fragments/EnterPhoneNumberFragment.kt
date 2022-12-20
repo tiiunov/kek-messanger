@@ -48,7 +48,6 @@ class EnterPhoneNumberFragment : BaseFragment(R.layout.fragment_enter_phone_numb
         if (register_input_phone_number.text.toString().isEmpty()) {
             showToast(getString(R.string.register_toast_enter_phone))
         } else {
-            //changeFragment(EnterCodeFragment())
             authUser()
         }
     }

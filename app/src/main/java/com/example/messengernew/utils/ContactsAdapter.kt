@@ -6,9 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.messengernew.R
+import com.example.messengernew.ui.fragments.BaseFragment
 import com.example.messengernew.ui.fragments.ContactsFragment
+import com.example.messengernew.ui.fragments.SingleChatFragment
 
-class ContactsAdapter(private val contacts: ArrayList<ContactsFragment.Contact>) :
+class ContactsAdapter(private val contacts: ArrayList<ContactsFragment.Contact>,
+                      private val parentFragment: BaseFragment) :
     RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -30,6 +33,9 @@ class ContactsAdapter(private val contacts: ArrayList<ContactsFragment.Contact>)
         textView.text = contact.fullName
         val textViewStatus = viewHolder.status
         textViewStatus.text = contact.status
+        viewHolder.itemView.setOnClickListener {
+            parentFragment.changeFragment(SingleChatFragment(contact))
+        }
     }
 
     override fun getItemCount(): Int {

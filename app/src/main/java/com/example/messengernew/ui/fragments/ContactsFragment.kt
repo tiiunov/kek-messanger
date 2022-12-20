@@ -56,7 +56,7 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
     }
 
     private fun createAdapter() {
-        mAdapter = ContactsAdapter(userContacts)
+        mAdapter = ContactsAdapter(userContacts, this)
         recyclerView.adapter = mAdapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
     }

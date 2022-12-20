@@ -13,7 +13,7 @@ import com.example.messengernew.utils.*
 
 open class MainActivity : RegisterActivity() {
     private lateinit var mBinding: ActivityMainBinding
-    private lateinit var mToolbar: Toolbar
+    lateinit var mToolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
