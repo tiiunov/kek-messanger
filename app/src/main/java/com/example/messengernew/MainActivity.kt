@@ -6,7 +6,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.example.messengernew.activities.RegisterActivity
 import com.example.messengernew.databinding.ActivityMainBinding
-import com.example.messengernew.ui.fragments.ChatsFragment
+import com.example.messengernew.ui.fragments.ContactsFragment
 import com.example.messengernew.ui.fragments.EnterPhoneNumberFragment
 import com.example.messengernew.ui.objects.AppDriver
 import com.example.messengernew.utils.*
@@ -35,7 +35,7 @@ open class MainActivity : RegisterActivity() {
         setSupportActionBar(mToolbar)
         APP_DRIVER.create()
         if (AUTH.currentUser != null) {
-            changeFragment(ChatsFragment())
+            changeFragment(ContactsFragment())
         } else {
             changeFragment(EnterPhoneNumberFragment())
         }

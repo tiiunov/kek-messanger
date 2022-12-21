@@ -5,5 +5,5 @@ data class User(
     var userName: String = "",
     var fullName: String = "",
     var phone: String = "",
-    var status: String = ""
+    var state: String = ""
 )

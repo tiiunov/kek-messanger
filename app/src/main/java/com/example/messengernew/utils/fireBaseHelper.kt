@@ -17,6 +17,7 @@ lateinit var REF_DATABASE_ROOT: DatabaseReference
 lateinit var USER: User
 
 const val NODE_USERS = "users"
+const val NODE_MESSAGES = "messages"
 const val CHILD_ID = "id"
 const val CHILD_USER_NAME = "userName"
 const val CONSTANT_CHILD_PHONE = "phone"
@@ -25,6 +26,9 @@ const val NODE_USERNAMES = "usernames"
 const val CHILD_STATE = "state"
 const val NODE_PHONES = "phones"
 const val NODE_PHONE_CONTACTS = "phoneContacts"
+
+const val CHILD_TEXT = "text"
+const val CHILD_AUTHOR = "author"
 
 fun initFirebase() {
     AUTH = FirebaseAuth.getInstance()
@@ -65,15 +69,35 @@ fun initContacts(activity: Activity) {
 }
 
 fun updatePhonesToDb(contacts: ArrayList<CommonModel>) {
-    REF_DATABASE_ROOT.child(NODE_PHONES).addListenerForSingleValueEvent(ValueEventListenerImpl {
-        it.children.forEach { dbContact ->
-            contacts.forEach { contact ->
-                if (dbContact.key == contact.phone) {
-                    REF_DATABASE_ROOT.child(NODE_PHONE_CONTACTS).child(USER.id)
-                        .child(dbContact.value.toString()).child(CHILD_ID)
-                        .setValue(dbContact.value.toString())
+    if (AUTH.currentUser != null) {
+        REF_DATABASE_ROOT.child(NODE_PHONES).addListenerForSingleValueEvent(ValueEventListenerImpl {
+            it.children.forEach { dbContact ->
+                contacts.forEach { contact ->
+                    if (dbContact.key == contact.phone) {
+                        REF_DATABASE_ROOT.child(NODE_PHONE_CONTACTS).child(USER.id)
+                            .child(dbContact.value.toString()).child(CHILD_ID)
+                            .setValue(dbContact.value.toString())
+                    }
                 }
             }
-        }
-    })
+        })
+    }
+}
+
+fun sendMessage(message: String, sendUserId: String, activity: Activity) {
+    val userId = AUTH.currentUser?.uid.toString()
+    val refDialogUser = "$NODE_MESSAGES/$userId/$sendUserId"
+    val refDialogSendUser = "$NODE_MESSAGES/$sendUserId/$userId"
+    val messageKey = REF_DATABASE_ROOT.child(refDialogUser).push().key
+
+    val messages = hashMapOf<String, String>()
+    messages[CHILD_AUTHOR] = userId
+    messages[CHILD_TEXT] = message
+
+    val mapDialog = hashMapOf<String, Any>()
+    mapDialog["$refDialogUser/$messageKey"] = messages
+    mapDialog["$refDialogSendUser/$messageKey"] = messages
+
+    REF_DATABASE_ROOT.updateChildren(mapDialog)
+        .addOnFailureListener { activity.showToast(it.message.toString()) }
 }

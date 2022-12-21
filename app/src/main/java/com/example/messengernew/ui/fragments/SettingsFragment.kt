@@ -3,8 +3,10 @@ package com.example.messengernew.ui.fragments
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import com.example.messengernew.MainActivity
 import com.example.messengernew.R
 import com.example.messengernew.utils.AUTH
+import com.example.messengernew.utils.AppState
 import com.example.messengernew.utils.USER
 import com.example.messengernew.utils.changeFragment
 import com.mikepenz.materialdrawer.AccountHeader
@@ -26,6 +28,7 @@ class SettingsFragment(private val header: AccountHeader) :
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.settings_menu_exit -> {
+                AppState.updateState(AppState.OFFLINE, (activity as MainActivity))
                 AUTH.signOut()
                 changeFragment(EnterPhoneNumberFragment())
             }
@@ -38,7 +41,7 @@ class SettingsFragment(private val header: AccountHeader) :
     private fun initFields() {
         settings_full_name.text = USER.fullName
         settings_phone_number.text = USER.phone
-        settings_status.text = USER.status
+        settings_status.text = USER.state
         settings_username.text = USER.userName
         settings_btn_change_username.setOnClickListener { changeFragment(ChangeUsernameFragment()) }
     }

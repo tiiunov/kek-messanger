@@ -35,7 +35,7 @@ class EnterCodeFragment(private val mPhoneNumber: String, val id: String) :
                         REF_DATABASE_ROOT.child(NODE_USERS).child(uid).updateChildren(dataMap)
                             .addOnSuccessListener {
                                 showToast("Добро пожаловать!")
-                                (activity as RegisterActivity).changeFragment(ChatsFragment())
+                                (activity as RegisterActivity).changeFragment(ContactsFragment())
                                 initFirebase()
                             }
                             .addOnFailureListener { showToast(it.message.toString()) }

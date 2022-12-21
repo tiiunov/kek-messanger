@@ -25,7 +25,7 @@ class EnterPhoneNumberFragment : BaseFragment(R.layout.fragment_enter_phone_numb
                 AUTH.signInWithCredential(credential).addOnCompleteListener {
                     if (it.isSuccessful) {
                         showToast("Добро пожаловать!")
-                        changeFragment(ChatsFragment())
+                        changeFragment(ContactsFragment())
                     } else {
                         showToast(it.exception?.message.toString())
                     }
